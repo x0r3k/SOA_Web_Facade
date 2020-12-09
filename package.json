@@ -1,0 +1,24 @@
+{
+  "name": "web_facade",
+  "version": "1.0.0",
+  "description": "Layer for web communication with registry",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/x0r3k/SOA_Web_Facade.git"
+  },
+  "keywords": [
+    "SOA",
+    "Web_facade",
+    "Layer"
+  ],
+  "author": "KDolhopolov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/x0r3k/SOA_Web_Facade/issues"
+  },
+  "homepage": "https://github.com/x0r3k/SOA_Web_Facade#readme"
+}
