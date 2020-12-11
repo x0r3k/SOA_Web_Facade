@@ -5,7 +5,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const createError = require('http-errors');
 const { formErrorObject, errorHandling, MAIN_ERROR_CODES } = require('./src/services/errorHandling');
-// const orderRouter = require('./src/api/routers/order.router');
+const redirectRouter = require('./src/api/routers/redirect.router');
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -17,7 +17,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use('/api/order', orderRouter);
+app.use('/facade', redirectRouter);
 
 app.use('*', (req, res, next) => {
     return next(createError(formErrorObject(MAIN_ERROR_CODES.NOT_FOUND)));

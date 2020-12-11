@@ -1,25 +1,28 @@
 const { query, param, check } = require('express-validator');
+const { HTTP_METHODS } = require('../helpers/constants');
+const URI = require('../helpers/URI');
+const { isObject } = require('../helpers/isObject');
 
 const isRequiredParameter = (isRequired, paramName) => {
     return isRequired ? check(paramName).exists().withMessage('Is required').bail() : check(paramName).optional();
 }
 
 module.exports = {
-    // body_Transaction_PaymentType: (isRequired) => {
-    //     return isRequiredParameter(isRequired, 'paymentType').notEmpty().withMessage('Should not be empty').bail()
-    //         .isIn(PAYMENT_TYPES).withMessage(`Should be one of values: ${PAYMENT_TYPES}`).bail();
-    // },
-    // body_Delivery_DeliveryType: (isRequired) => {
-    //     return isRequiredParameter(isRequired, 'deliveryType').notEmpty().withMessage('Should not be empty').bail()
-    //         .isIn(DELIVERY_TYPES).withMessage(`Should be one of values: ${DELIVERY_TYPES}`).bail();
-    // },
-    body_Delivery_City: (isRequired) => {
-        return isRequiredParameter(isRequired, 'city').notEmpty().withMessage('Should not be empty').bail()
+    body_URI: (isRequired) => {
+        return isRequiredParameter(isRequired, 'uri').notEmpty().withMessage('Should not be empty').bail()
           .isString().withMessage('Should be string')
           .isLength({ max: 50 }).withMessage('Max length is 255 symbols');
     },
-    body_Order_Promo: (isRequired) => {
-        return isRequiredParameter(isRequired, 'promo').notEmpty().withMessage('Should not be empty').bail()
-            .isDecimal().withMessage('Should be an float value').bail();
+    body_Method: (isRequired) => {
+        return isRequiredParameter(isRequired, 'method').notEmpty().withMessage('Should not be empty').bail()
+            .isIn(HTTP_METHODS).withMessage(`Should be one of values: ${HTTP_METHODS}`).bail();
+    },
+    body_Body: (isRequired) => {
+        return isRequiredParameter(isRequired, 'body').notEmpty().withMessage('Should not be empty').bail()
+            .custom(value => isObject(value)).withMessage('Should be object');
+    },
+    body_Headers: (isRequired) => {
+        return isRequiredParameter(isRequired, 'headers').notEmpty().withMessage('Should not be empty').bail()
+            .custom(value => isObject(value));
     }
 }
