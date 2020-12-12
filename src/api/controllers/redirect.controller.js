@@ -15,7 +15,6 @@ module.exports = {
             }
 
             const { uri, method, body, headers } = req.body;
-            console.log(headers);
             const methodURIs = Object.keys(URI[method]);
             let result = parseUrl(uri, methodURIs, next);
 
@@ -26,11 +25,12 @@ module.exports = {
             service = service.data.serviceInstance;
 
             let serviceResponse = await sendRequest[method](service, uri, body, headers);
-            console.log(serviceResponse.data)
             return res.status(200).json(serviceResponse.data);
         } catch (error) {
-            if(error.response && error.response.data && error.response.data.code && error.response.data.message) {
-                return next(createError(formErrorObject({ERROR_CODE: error.response.data.code, HTTP_CODE: error.response.status, MESSAGE: error.response.data.message })));
+            if(error.response && error.response.data && error.response.data.code) {
+                let errorObj = Object.values(MAIN_ERROR_CODES).find(item => item.ERROR_CODE === error.response.data.code);
+                return next(createError(formErrorObject(errorObj, error.response.data.message, error.response.data.details)));
+                // return next(createError(formErrorObject({ERROR_CODE: error.response.data.code, HTTP_CODE: error.response.status, MESSAGE: error.response.data.message })));
             }
             return next(createError(formErrorObject(MAIN_ERROR_CODES.SYSTEM_ERROR, 'Something went wrong, please try again')));
         }

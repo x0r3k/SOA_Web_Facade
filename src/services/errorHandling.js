@@ -120,7 +120,7 @@ const MAIN_ERROR_CODES = {
   }
   
   function errorHandling(error, req, res, next) {
-    console.log(error);
+    // console.log(error);
     if (error instanceof SyntaxError) {
       res.status(400);
       res.json({
