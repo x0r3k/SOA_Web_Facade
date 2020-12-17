@@ -18,6 +18,7 @@ const URI = {
         '/api/car/getCars': 'car',
         '/api/car/getCar/:id': 'car',
         '/api/car/getGarageCars': 'car',
+        '/api/car/getCarByParams': 'car',
 
         '/api/category/getCategories': 'product',
         '/api/product/getProducts': 'product',
