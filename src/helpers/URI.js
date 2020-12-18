@@ -26,6 +26,7 @@ const URI = {
         '/api/product/getProductByCategory/:id': 'product',
         '/api/product/getProductByCategoryCar': 'product',
 
+        '/api/order/getCartProductsList': 'order',
     },
     PUT: {
         '/api/admin/user/updateUser/:id': 'auth',
