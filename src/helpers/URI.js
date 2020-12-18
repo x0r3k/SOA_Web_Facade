@@ -41,7 +41,7 @@ const URI = {
         '/api/user/deleteAccount': 'auth',
 
         '/api/car/removeFromGarage/:id': 'car',
-
+        '/api/order/removeFromCart': 'order',
     }
 };
 
