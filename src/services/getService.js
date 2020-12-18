@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-async function getServiceByCode(code) {
-    return await axios.get(`http://localhost:${process.env.REGISTER_PORT}/api/registry/getServiceInstance?code=${code}`);
+function getServiceByCode(code) {
+    return axios.get(`http://localhost:${process.env.REGISTER_PORT}/api/registry/getServiceInstance?code=${code}`);
 }
 
 module.exports = {

@@ -13,20 +13,22 @@ module.exports = {
             if (!errors.isEmpty()) {
                 return next(createError(formErrorObject(MAIN_ERROR_CODES.VALIDATION_BODY, 'Invalid request params', errors.errors)));
             }
-
+            
             const { uri, method, body, headers } = req.body;
             const methodURIs = Object.keys(URI[method]);
             let result = parseUrl(uri, methodURIs, next);
-
             if(result === 500) return next(createError(formErrorObject(MAIN_ERROR_CODES.SYSTEM_ERROR, 'Wrong function params')));
             else if(result === 404) return next(createError(formErrorObject(MAIN_ERROR_CODES.ELEMENT_NOT_FOUND, 'API not found')));
-
+            
             let service = await getServiceByCode(URI[method][result]);
+
             service = service.data.serviceInstance;
+            console.log("Service", service);
 
             let serviceResponse = await sendRequest[method](service, uri, body, headers);
             return res.status(200).json(serviceResponse.data);
         } catch (error) {
+            console.log(error);
             if(error.response && error.response.data && error.response.data.code) {
                 let errorObj = Object.values(MAIN_ERROR_CODES).find(item => item.ERROR_CODE === error.response.data.code);
                 return next(createError(formErrorObject(errorObj, error.response.data.message, error.response.data.details)));
