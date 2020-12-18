@@ -11,7 +11,7 @@ module.exports = {
     body_URI: (isRequired) => {
         return isRequiredParameter(isRequired, 'uri').notEmpty().withMessage('Should not be empty').bail()
           .isString().withMessage('Should be string')
-          .isLength({ max: 50 }).withMessage('Max length is 255 symbols');
+          .isLength({ max: 250 }).withMessage('Max length is 255 symbols');
     },
     body_Method: (isRequired) => {
         return isRequiredParameter(isRequired, 'method').notEmpty().withMessage('Should not be empty').bail()
