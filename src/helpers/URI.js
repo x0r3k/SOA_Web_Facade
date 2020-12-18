@@ -7,6 +7,7 @@ const URI = {
         
         '/api/car/addToGarage/:id': 'car',
 
+        '/api/order/addToCart': 'order',
     },
     GET: {
         '/api/admin/user/getUser/:id': 'auth',
