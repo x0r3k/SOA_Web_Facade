@@ -22,6 +22,7 @@ const URI = {
         '/api/car/getCarByParams': 'car',
 
         '/api/category/getCategories': 'product',
+        '/api/category/getCategoryById/:id': 'product',
         '/api/product/getProducts': 'product',
         '/api/product/getProductById/:id': 'product',
         '/api/product/getProductByCategory/:id': 'product',

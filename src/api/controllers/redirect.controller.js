@@ -23,7 +23,6 @@ module.exports = {
             let service = await getServiceByCode(URI[method][result]);
 
             service = service.data.serviceInstance;
-            console.log("Service", service);
 
             let serviceResponse = await sendRequest[method](service, uri, body, headers);
             return res.status(200).json(serviceResponse.data);
